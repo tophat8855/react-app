@@ -28,3 +28,35 @@ it('throws error when the enthusiasm level is negative', () => {
     enzyme.shallow(<Hello name='Danielle' enthusiasmLevel={-1} />)
   }).toThrow()
 })
+
+it('calls onIncrement when + button is clicked', () => {
+  var spy = jest.fn()
+
+  var props = {
+    name: 'Danielle',
+    enthusiasmLevel: 5,
+    onIncrement: spy
+  }
+
+  const hello = enzyme.shallow(<Hello {...props} />)
+
+  hello.find('button').at(1).simulate('click')
+  expect(spy).toHaveBeenCalled
+  // expect(hello.find('.greeting').text()).toEqual('Hello Danielle!!!!!!')
+})
+
+it('calls onDecrement when - button is clicked', () => {
+  var spy = jest.fn()
+
+  var props = {
+    name: 'Danielle',
+    enthusiasmLevel: 5,
+    onIncrement: spy
+  }
+
+  const hello = enzyme.shallow(<Hello {...props} />)
+
+  hello.find('button').at(0).simulate('click')
+  expect(spy).toHaveBeenCalled
+  // expect(hello.find('.greeting').text()).toEqual('Hello Danielle!!!!')
+})
